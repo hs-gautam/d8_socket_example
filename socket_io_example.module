@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * Contains socket_io_example.module..
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function socket_io_example_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the socket_io_example module.
+    case 'help.page.socket_io_example':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Integration with socket.io.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_node_view().
+ * */
+function socket_io_example_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+  // TODO:
+  $user = \Drupal::currentUser()->getRoles();
+  if(in_array("administrator", $user)) {
+    $build['socket_io_previous'] = array(
+      '#type' => 'button',
+      '#value' => t('Previous'),
+      '#attributes' => array('class' => array('socket-io-previous')),
+    );
+    $build['socket_io_next'] = array(
+      '#type' => 'button',
+      '#value' => t('Next'),
+      '#attributes' => array('class' => array('socket-io-next')),
+    );
+    $build['#attached']['library'][] = 'socket_io_example/socket-pdf-viewer';
+  }
+  else {
+    $build['#attached']['library'][] = 'socket_io_example/socket-pdf-viewer-user';
+  }
+}

@@ -1,0 +1,25 @@
+# admin
+socket-pdf-viewer:
+  version: 1.x
+  css:
+    theme:
+      css/socket-pdf-viewer.css: {}
+  js:
+    'http://localhost:3000/socket.io/socket.io.js': { external: true }
+    js/socket-pdf-viewer.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+
+# user
+socket-pdf-viewer-user:
+  version: 1.x
+  css:
+    theme:
+      css/socket-pdf-viewer.css: {}
+  js:
+    'http://localhost:3000/socket.io/socket.io.js': { external: true }
+    js/socket-pdf-viewer-user.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
