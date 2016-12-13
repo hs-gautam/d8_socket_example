@@ -27,22 +27,23 @@ function socket_io_example_help($route_name, RouteMatchInterface $route_match) {
  * Implements hook_node_view().
  * */
 function socket_io_example_entity_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
-  // TODO:
-  $user = \Drupal::currentUser()->getRoles();
-  if(in_array("administrator", $user)) {
-    $build['socket_io_previous'] = array(
-      '#type' => 'button',
-      '#value' => t('Previous'),
-      '#attributes' => array('class' => array('socket-io-previous')),
-    );
-    $build['socket_io_next'] = array(
-      '#type' => 'button',
-      '#value' => t('Next'),
-      '#attributes' => array('class' => array('socket-io-next')),
-    );
-    $build['#attached']['library'][] = 'socket_io_example/socket-pdf-viewer';
-  }
-  else {
-    $build['#attached']['library'][] = 'socket_io_example/socket-pdf-viewer-user';
+  if ($entity->bundle() == 'event') {
+    $user = \Drupal::currentUser()->getRoles();
+    if(in_array("administrator", $user)) {
+      $build['socket_io_previous'] = array(
+        '#type' => 'button',
+        '#value' => t('Previous'),
+        '#attributes' => array('class' => array('socket-io-previous')),
+      );
+      $build['socket_io_next'] = array(
+        '#type' => 'button',
+        '#value' => t('Next'),
+        '#attributes' => array('class' => array('socket-io-next')),
+      );
+      $build['#attached']['library'][] = 'socket_io_example/socket-pdf-viewer';
+    }
+    else {
+      $build['#attached']['library'][] = 'socket_io_example/socket-pdf-viewer-user';
+    }
   }
 }
