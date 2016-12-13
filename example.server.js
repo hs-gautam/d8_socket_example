@@ -7,11 +7,11 @@ var io = require('socket.io')(server);
 io.on('connection', function(socket){
   // Next
   socket.on('change-page-next', function(data){
-    io.sockets.emit('change-page-next', {});
+    io.sockets.emit('change-page-next', {'data':data});
   });
   // Previous
   socket.on('change-page-previous', function(data){
-    io.sockets.emit('change-page-previous', {});
+    io.sockets.emit('change-page-previous', {'data':data});
   });
   socket.on('disconnect', function(){
     console.log('disconnected');
